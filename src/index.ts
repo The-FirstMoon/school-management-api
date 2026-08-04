@@ -62,12 +62,23 @@ import dotenv from "dotenv";
 import app from "./app";
 import pool from "./config/db";
 dotenv.config();
+import { initializeDatabase } from "./database/init";
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+async function startServer() {
+  try {
+    await initializeDatabase();
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+startServer();
 // app.listen(PORT, async () => {
 //   try {
 //     await pool.query("SELECT NOW()");
