@@ -14,6 +14,7 @@ import {
   getStudentClasses,
   getTeacherClass,
 } from "../controllers/class.controller";
+import { Api_KeyAuth } from "../middleware/Api_KeyAuth.middleware";
 //import { deleteTeacherClass } from "../services/class.services";
 
 const router = Router();
@@ -23,6 +24,8 @@ const router = Router();
  * @swagger
  * /class/add:
  *   post:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: Add a class
  *     requestBody:
  *       required: true
@@ -37,7 +40,7 @@ const router = Router();
  *       201:
  *         description: Class created
  */
-router.post("/add", validate(classSchema), addClass);
+router.post("/add", validate(classSchema), Api_KeyAuth, addClass);
 
 /**
  * @swagger
@@ -73,6 +76,8 @@ router.get("/:id", getClass);
  * @swagger
  * /class/edit:
  *   put:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: Edit a class
  *     requestBody:
  *       required: true
@@ -89,12 +94,14 @@ router.get("/:id", getClass);
  *       201:
  *         description: Class edited
  */
-router.put("/edit", validate(classSchema), editClass);
+router.put("/edit", validate(classSchema),Api_KeyAuth, editClass);
 
 /**
  * @swagger
  * /class/{id}:
  *   delete:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: delete one Class
  *     parameters:
  *       - in: path
@@ -109,13 +116,15 @@ router.put("/edit", validate(classSchema), editClass);
  *       404:
  *         description: Class not deleted
  */
-router.delete("/:id", deleteClass);
+router.delete("/:id",Api_KeyAuth, deleteClass);
 
-// Student ↔ Class
+// Student <-> Class
 /**
  * @swagger
  * /class/enroll-student:
  *   post:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: Add a student to class<->student
  *     requestBody:
  *       required: true
@@ -134,12 +143,14 @@ router.delete("/:id", deleteClass);
  *       404:
  *         description: Student not found
  */
-router.post("/enroll-student", addStudentClass);
+router.post("/enroll-student", Api_KeyAuth, addStudentClass);
 
 /**
  * @swagger
  * /class/{classId}/student/{studentId}:
  *   delete:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: delete one Class-Student
  *     parameters:
  *       - in: path
@@ -160,7 +171,7 @@ router.post("/enroll-student", addStudentClass);
  *       404:
  *         description: Class-Student not deleted
  */
-router.delete("/:classId/student/:studentId", deleteStudentClass);
+router.delete("/:classId/student/:studentId", Api_KeyAuth, deleteStudentClass);
 /**
  * @swagger
  * /class/{classId}/students:
@@ -181,11 +192,13 @@ router.delete("/:classId/student/:studentId", deleteStudentClass);
  */
 router.get("/:classId/students", getStudentClasses);
 
-// Teacher ↔ Class
+// Teacher <-> Class
 /**
  * @swagger
  * /class/add-teacher:
  *   post:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: Add a teacher to class<->teacher
  *     requestBody:
  *       required: true
@@ -204,12 +217,14 @@ router.get("/:classId/students", getStudentClasses);
  *       404:
  *         description: Teacher not found
  */
-router.post("/add-teacher", addTeacherClass);
+router.post("/add-teacher", Api_KeyAuth, addTeacherClass);
 
 /**
  * @swagger
  * /class/{classId}/teacher/{teacherId}:
  *   delete:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: delete one Class-Teacher
  *     parameters:
  *       - in: path
@@ -231,7 +246,7 @@ router.post("/add-teacher", addTeacherClass);
  *       404:
  *         description: Class-Teacher not deleted
  */
-router.delete("/:classId/teacher/:teacherId", deleteTeacherClass)
+router.delete("/:classId/teacher/:teacherId", Api_KeyAuth, deleteTeacherClass)
 /**
  * @swagger
  * /class/{classId}/teachers:

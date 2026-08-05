@@ -7,10 +7,16 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   console.error(err);
-   if (err.code === "23505") {
-        res.status(409).json({message:err?.detail})
+
+  if (err.code === "23505") {
+    if (err.constraint === "students_roll_number_key") {
+      return res.status(409).json({
+        message: "Roll number already exists",
+      });
     }
-  res.status(500).json({
+  }
+
+  return res.status(err.status || 500).json({
     message: err.message || "Internal Server Error",
   });
 };

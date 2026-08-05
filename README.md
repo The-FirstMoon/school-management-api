@@ -54,6 +54,7 @@ DB_PORT=5432
 DB_USER=your_username
 DB_PASSWORD=your_password
 DB_NAME=school
+API_KEY=your_ApiKey
 ```
 
 Run the server:

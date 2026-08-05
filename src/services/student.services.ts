@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import pool from "../config/db";
 import { Student } from "../types/student.type";
 import { AddStudentDto, EditStudentDto } from "../dtos/student.dto";
@@ -57,8 +56,6 @@ export const editStudent = async (
   //id: number,
   student: EditStudentDto
 ) => {
-  try {
-      
     const {
       id,
       name,
@@ -87,13 +84,7 @@ export const editStudent = async (
     );
 
     return result.rows[0];
-  } catch (err : any) {
-    if (err.code === "23505") {
-        throw new Error("Roll number already exists");
-    }
-
-    throw err;
-  }
+ 
 };
 
 export const deleteStudent = async (id: number) => {

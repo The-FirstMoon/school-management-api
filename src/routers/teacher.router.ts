@@ -9,6 +9,7 @@ import {
   getTeacher,
   getTeachers,
 } from "../controllers/teacher.controller";
+import { Api_KeyAuth } from "../middleware/Api_KeyAuth.middleware";
 
 const router = Router();
 
@@ -17,6 +18,8 @@ const router = Router();
  * @swagger
  * /teacher:
  *   post:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: Add a teacher
  *     requestBody:
  *       required: true
@@ -35,7 +38,7 @@ const router = Router();
  *       201:
  *         description: Teacher created
  */
-router.post("/", validate(teacherSchema), addTeacher);
+router.post("/", validate(teacherSchema),Api_KeyAuth, addTeacher);
 
 // Read
 /**
@@ -73,6 +76,8 @@ router.get("/:id", getTeacher);
  * @swagger
  * /teacher/edit:
  *   put:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: Edit a teacher
  *     requestBody:
  *       required: true
@@ -93,15 +98,16 @@ router.get("/:id", getTeacher);
  *       201:
  *         description: Teacher edited
  */
-router.put("/edit", validate(editTeacherSchema), editTeacher);
+router.put("/edit", validate(editTeacherSchema), Api_KeyAuth, editTeacher);
 router.patch("/:id/salary", editSalary);
 
-// Delete
 // Delete
 /**
  * @swagger
  * /teacher/{id}:
  *   delete:
+ *     security: 
+ *      - ApiKeyAuth: []
  *     summary: delete one teacher
  *     parameters:
  *       - in: path

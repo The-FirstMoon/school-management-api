@@ -1,16 +1,27 @@
-import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 const options: swaggerJsdoc.Options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
+
     info: {
-      title: 'Sample API Documentation',
-      version: '1.0.0',
-      description: 'This is a sample API documentation using Swagger.',
+      title: "Sample API Documentation",
+      version: "1.0.0",
+      description: "This is a sample API documentation using Swagger.",
+    },
+
+    components: {
+      securitySchemes: {
+        ApiKeyAuth: {
+          type: "apiKey",
+          in: "header",
+          name: "x-api-key",
+        },
+      },
     },
   },
-  apis: ['./src/routers/*.ts'],
+  apis: ["./src/routers/*.ts"],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);
