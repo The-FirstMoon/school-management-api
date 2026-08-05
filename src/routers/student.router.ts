@@ -9,7 +9,7 @@ import {
   getStudent,
   getStudents,
 } from "../controllers/student.controller";
-import { Api_KeyAuth } from "../middleware/Api_KeyAuth.middleware";
+import { apiKeyAuth } from "../middleware/apiKeyAuth";
 
 const router = Router();
 
@@ -44,7 +44,7 @@ const router = Router();
  *       201:
  *         description: Student created
  */
-router.post("/add", Api_KeyAuth, validate(studentSchema), addStudent);
+router.post("/add", apiKeyAuth, validate(studentSchema), addStudent);
 /**
  * @swagger
  * /student/addInfo:
@@ -120,7 +120,7 @@ router.get("/:id", getStudent);
  *       201:
  *         description: Student edited
  */
-router.put("/edit", Api_KeyAuth, validate(editStudentSchema),  editStudent);
+router.put("/edit", apiKeyAuth, validate(editStudentSchema),  editStudent);
 
 // Delete
 /**
@@ -143,6 +143,6 @@ router.put("/edit", Api_KeyAuth, validate(editStudentSchema),  editStudent);
  *       404:
  *         description: Student not deleted
  */
-router.delete("/:id", Api_KeyAuth, deleteStudent);
+router.delete("/:id", apiKeyAuth, deleteStudent);
 
 export default router;

@@ -9,7 +9,7 @@ import {
   getTeacher,
   getTeachers,
 } from "../controllers/teacher.controller";
-import { Api_KeyAuth } from "../middleware/Api_KeyAuth.middleware";
+import { apiKeyAuth } from "../middleware/apiKeyAuth";
 
 const router = Router();
 
@@ -38,7 +38,7 @@ const router = Router();
  *       201:
  *         description: Teacher created
  */
-router.post("/", Api_KeyAuth, validate(teacherSchema), addTeacher);
+router.post("/", apiKeyAuth, validate(teacherSchema), addTeacher);
 
 // Read
 /**
@@ -98,7 +98,7 @@ router.get("/:id", getTeacher);
  *       201:
  *         description: Teacher edited
  */
-router.put("/edit", Api_KeyAuth, validate(editTeacherSchema), editTeacher);
+router.put("/edit", apiKeyAuth, validate(editTeacherSchema), editTeacher);
 router.patch("/:id/salary", editSalary);
 
 // Delete
