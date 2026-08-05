@@ -40,7 +40,7 @@ const router = Router();
  *       201:
  *         description: Class created
  */
-router.post("/add", validate(classSchema), Api_KeyAuth, addClass);
+router.post("/add", Api_KeyAuth, validate(classSchema), addClass);
 
 /**
  * @swagger
@@ -94,7 +94,7 @@ router.get("/:id", getClass);
  *       201:
  *         description: Class edited
  */
-router.put("/edit", validate(classSchema),Api_KeyAuth, editClass);
+router.put("/edit", Api_KeyAuth, validate(classSchema), editClass);
 
 /**
  * @swagger

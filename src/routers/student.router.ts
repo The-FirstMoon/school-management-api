@@ -44,7 +44,7 @@ const router = Router();
  *       201:
  *         description: Student created
  */
-router.post("/add", validate(studentSchema), Api_KeyAuth, addStudent);
+router.post("/add", Api_KeyAuth, validate(studentSchema), addStudent);
 /**
  * @swagger
  * /student/addInfo:
@@ -120,7 +120,7 @@ router.get("/:id", getStudent);
  *       201:
  *         description: Student edited
  */
-router.put("/edit", validate(editStudentSchema), Api_KeyAuth, editStudent);
+router.put("/edit", Api_KeyAuth, validate(editStudentSchema),  editStudent);
 
 // Delete
 /**

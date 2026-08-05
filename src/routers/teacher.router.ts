@@ -38,7 +38,7 @@ const router = Router();
  *       201:
  *         description: Teacher created
  */
-router.post("/", validate(teacherSchema),Api_KeyAuth, addTeacher);
+router.post("/", Api_KeyAuth, validate(teacherSchema), addTeacher);
 
 // Read
 /**
@@ -98,7 +98,7 @@ router.get("/:id", getTeacher);
  *       201:
  *         description: Teacher edited
  */
-router.put("/edit", validate(editTeacherSchema), Api_KeyAuth, editTeacher);
+router.put("/edit", Api_KeyAuth, validate(editTeacherSchema), editTeacher);
 router.patch("/:id/salary", editSalary);
 
 // Delete
